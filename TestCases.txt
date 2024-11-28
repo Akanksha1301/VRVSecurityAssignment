@@ -1,0 +1,107 @@
+Test case for API: POST http://localhost:9000/VRV-Security-Intern/register
+
+Valid testcase
+
+1 Register with valid username, password, and role.	
+expected output: User registered successfully.
+data: 
+{
+  "username": "Adiya",
+  "password": "Qqxt!3r$nge9%",
+  "role": "User"
+}
+
+2. Register with a username that already exists.	
+expected output: Returns error: User already exists.
+data: 
+{
+  "username": "Nishtha Mahajan",
+  "password": "xt!3Or@nge9%",
+  "role": "User"
+}
+
+3. Register without a username.	
+expected output: Returns error: Username is required.
+data:
+{
+  "password": "JqQ!3Or@nge9%",
+  "role": "User"
+}
+
+4. Register without a password.	
+expected output: Returns error: Password is required.
+data:
+{
+  "username": "Nishtha Mahajan",
+  "role": "User"
+}
+
+
+5. Register with a weak password (does not meet criteria).	
+
+expected output: Returns error: Password does not meet requirements(give specific error like:
+a. Password must be at least 8 characters long.
+b. Password must contain at least one uppercase letter.
+c. Password must contain at least one digit.
+d. Password must contain at least one special character.
+)
+data:
+{
+  "username": "Nishtha Mahajan",
+  "password": "werge1234",
+  "role": "User"
+}
+in this case error will be: Password must contain at least one special character.
+
+7.Register without specifying a role.	
+expected output: Returns error: Role is required.
+data:
+{
+    "username": "Nishtha Mahajan",
+    "password": "xt!3Or@nge9%"
+}
+
+Test case for API: POST http://localhost:9000/VRV-Security-Intern/signin
+
+
+1. Login with correct username and password.
+expected output: Returns JWT token for user.
+data: 
+{
+  "username": "Akanksha Jain",
+  "password": "AljiN3@Gr33n",
+}
+
+2. Login with incorrect username.
+expected output: Returns error: Invalid username or password..
+data: 
+{
+  "username": "Akanksha",
+  "password": "AljiN3@Gr33n",
+}
+
+3. Login with incorrect password.
+expected output: Returns error: Invalid username or password..
+data: 
+{
+  "username": "Akanksha Jain",
+  "password": "Alj@Gr33n",
+}
+
+4. Login with empty username or password.
+expected output:  Username and password are required.
+data: 
+{
+  "username": "",
+  "password": "",
+}
+
+5. Login as a user who hasn’t registered.
+expected output: Invalid username or password.
+data:
+{
+  "username": "Adiya",
+  "password": "Qqxt!3r$nge9%",
+  "role": "User"
+}
+
